@@ -1,5 +1,8 @@
 namespace Dint
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class CollectionExtensions
     {
         public static T? PeekIfNotEmpty<T>(this Stack<T> q) => q.Count > 0 ? q.Peek() : default(T);
