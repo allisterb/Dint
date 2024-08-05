@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35017.193
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dint.Base", "Dint.Base\Dint.Base.csproj", "{D46E3060-1B4E-4BB8-ABCB-25621B4479CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F27B7877-1F23-497E-8B8C-44CFAA049548}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{AEF51FA4-3834-418F-9301-D21CC4CFC361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dint.CLI", "Dint.CLI\Dint.CLI.csproj", "{9879C15C-52CA-47B8-9C15-E0B61EA88267}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D46E3060-1B4E-4BB8-ABCB-25621B4479CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46E3060-1B4E-4BB8-ABCB-25621B4479CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46E3060-1B4E-4BB8-ABCB-25621B4479CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46E3060-1B4E-4BB8-ABCB-25621B4479CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9879C15C-52CA-47B8-9C15-E0B61EA88267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9879C15C-52CA-47B8-9C15-E0B61EA88267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9879C15C-52CA-47B8-9C15-E0B61EA88267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9879C15C-52CA-47B8-9C15-E0B61EA88267}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D46E3060-1B4E-4BB8-ABCB-25621B4479CC} = {F27B7877-1F23-497E-8B8C-44CFAA049548}
+		{9879C15C-52CA-47B8-9C15-E0B61EA88267} = {AEF51FA4-3834-418F-9301-D21CC4CFC361}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8552378A-FB50-40F8-AF09-AA1ED0DAC577}
+	EndGlobalSection
+EndGlobal
