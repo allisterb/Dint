@@ -63,39 +63,18 @@ namespace Dint
 
         public static string NormalizeFilePath(this string s) => s.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
 
-        public static Stream ToStream(this string s)
-        {
-            return new MemoryStream(Encoding.Default.GetBytes(s));
-        }
-
+        public static Stream ToStream(this string s) => new MemoryStream(Encoding.Default.GetBytes(s));
+        
         public static bool HasPeExtension(this string s) =>
             Path.GetExtension(s) == ".dll" || Path.GetExtension(s) == ".exe";
-
-        public static bool HasProjectExtension(this string s)
-        {
-            switch (Path.GetExtension(s))
-            {
-                case ".csproj":
-                case ".sscproj":
-                case ".cs":
-                case ".ssc":
-                    return true;
-                default: return false;
-            }
-        }
-
-        public static bool IsGitHubUrl(this string u) =>
-            Uri.TryCreate(u, UriKind.Absolute, out var uri) && uri.Host == "github.com" ? true : false;
 
         public static string CombinePath(this string s1, string s2) => Path.Combine(s1, s2);
 
         public static string Last(this StringBuilder sb)
         {
             var lines = sb.ToString().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            return lines.Length == 0 ?  "" : lines.Last();
-                    
-        }
-        
+            return lines.Length == 0 ?  "" : lines.Last();           
+        }  
     }
 
 }

@@ -41,10 +41,10 @@ public abstract class Runtime
 
     public static string PathSeparator { get; } = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
 
-    public static bool EnableLog { get; private set; } 
-    
+    public static bool LogEnabled { get; private set; }
+
     public static string ToolName { get; set; } = "Dint";
-        
+
     public static string LogName { get; set; } = "BASE";
 
     public static LoggerConfiguration LoggerConfiguration { get; protected set; } = new LoggerConfiguration();
@@ -86,14 +86,10 @@ public abstract class Runtime
                 Info("Runtime already initialized.");
                 return;
             }
-            if (debug)
-            {
-                DebugEnabled = true;
-                Info("Debug mode enabled.");
-            }
+           
             ToolName = toolname;
             LogName = logname;
-            EnableLog = enableLog;
+            LogEnabled = enableLog;
             DebugEnabled = debug;
 
             var fulllogfilename = DintDevDir.CombinePath($"{ToolName}.{SessionId}.log");
@@ -111,12 +107,16 @@ public abstract class Runtime
                 {
                     LoggerConfiguration = LoggerConfiguration.WriteTo.Console();
                 }
-                Log.Logger = LoggerConfiguration.CreateLogger();
-                Logger = (Serilog.Core.Logger) Log.Logger;
+               
             }
-
+            if (debug)
+            {
+                DebugEnabled = true;
+                Info("Debug mode enabled.");
+            }
+            Log.Logger = Logger = LoggerConfiguration.CreateLogger();
+         
             Info("Initialize called on thread id {0}.", Thread.CurrentThread.ManagedThreadId);
-            RuntimeInitialized = true;
             if (!IsUnitTestRun)
             {
                 Info("{0} initialized from entry assembly {1} with log file {2}...", ToolName, EntryAssembly?.GetName().FullName ?? "(none)", fulllogfilename);

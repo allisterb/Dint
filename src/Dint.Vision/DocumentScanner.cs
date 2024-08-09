@@ -2,13 +2,34 @@
 
 using System;
 using System.Collections.Generic;
-
 using OpenCvSharp;
 using static OpenCvSharp.Cv2;
 
 public class DocumentScanner
 {
-    public static void PreProcess(Mat src, ref Mat dst)
+    int compareXCords(Point p1, Point p2) => p1.X.CompareTo(p2.X);
+    
+
+    int compareYCords(Point p1, Point p2) => p1.Y.CompareTo(p2.Y);
+
+    int compareContourAreas(Point[] contour1, Point[] contour2) => Math.Abs(ContourArea(contour1)).CompareTo(Math.Abs(ContourArea(contour2))); 
+        
+    public void OrderPoints(Point[] inpts, ref Point[] ordered)
+    {
+        Array.Sort(inpts, compareXCords);
+        Point[] lm = inpts[0..2];
+        Point[] rm = inpts[^2..^0];
+        Array.Sort(lm, compareYCords);
+    }
+    
+
+    public void FourPointTransform(Mat src, ref Mat dst, Point[] pts)
+    {
+        //Orde
+    }
+
+
+    public void PreProcess(Mat src, ref Mat dst)
     {
         using Mat imageGrayed = new Mat();
         using Mat imageOpen = new Mat();
