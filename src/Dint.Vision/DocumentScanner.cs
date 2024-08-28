@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using OpenCvSharp;
 using static OpenCvSharp.Cv2;
 
@@ -12,20 +13,32 @@ public class DocumentScanner
 
     int compareYCords(Point p1, Point p2) => p1.Y.CompareTo(p2.Y);
 
-    int compareContourAreas(Point[] contour1, Point[] contour2) => Math.Abs(ContourArea(contour1)).CompareTo(Math.Abs(ContourArea(contour2))); 
-        
-    public void OrderPoints(Point[] inpts, ref Point[] ordered)
+    int compareContourAreas(Point[] contour1, Point[] contour2) => Math.Abs(ContourArea(contour1)).CompareTo(Math.Abs(ContourArea(contour2)));
+
+    int compareDistance((Point, Point) p1, (Point, Point) p2) => p1.Item1.DistanceTo(p1.Item2).CompareTo((p2.Item1.DistanceTo(p2.Item2)));
+    public void orderPoints(Point[] inpts, out Point[] ordered)
     {
+        if (inpts.Length != 4) throw new ArgumentException("The number of input points must be 4.");
+
         Array.Sort(inpts, compareXCords);
-        Point[] lm = inpts[0..2];
-        Point[] rm = inpts[^2..^0];
+        Point[] lm = [inpts[0], inpts[1]];
+        Point[] rm = [inpts[3], inpts[2]];
         Array.Sort(lm, compareYCords);
+        Point tl = lm[0];
+        Point bl = lm[1];
+
+        (Point,Point)[] tmp = [(tl, rm[0]), (tl, rm[1])];
+
+        Array.Sort(tmp, compareDistance);
+        Point tr = tmp[0].Item2;
+        Point br = tmp[1].Item2;
+        ordered = [tl, tr, br, bl]; 
     }
     
 
     public void FourPointTransform(Mat src, ref Mat dst, Point[] pts)
     {
-        //Orde
+        orderPoints(pts, out var ordered_pts);
     }
 
 
