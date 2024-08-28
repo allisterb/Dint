@@ -44,10 +44,10 @@ public class DocumentScanner
 
     public void PreProcess(Mat src, ref Mat dst)
     {
-        using Mat imageGrayed = new Mat();
-        using Mat imageOpen = new Mat();
-        using Mat imageClosed = new Mat();
-        using Mat imageBlurred = new Mat();
+        using Mat imageGrayed = new();
+        using Mat imageOpen = new();
+        using Mat imageClosed = new();
+        using Mat imageBlurred = new();
 
         CvtColor(src, imageGrayed, ColorConversionCodes.BGR2GRAY);
 
