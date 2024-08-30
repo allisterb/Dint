@@ -1,10 +1,11 @@
 ﻿namespace Dint.Vision;
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using static System.Math;
+
 using OpenCvSharp;
 using static OpenCvSharp.Cv2;
+using System.Security.Cryptography;
 
 public class DocumentScanner
 {
@@ -16,6 +17,7 @@ public class DocumentScanner
     int compareContourAreas(Point[] contour1, Point[] contour2) => Math.Abs(ContourArea(contour1)).CompareTo(Math.Abs(ContourArea(contour2)));
 
     int compareDistance((Point, Point) p1, (Point, Point) p2) => p1.Item1.DistanceTo(p1.Item2).CompareTo((p2.Item1.DistanceTo(p2.Item2)));
+    
     public void orderPoints(Point[] inpts, out Point[] ordered)
     {
         if (inpts.Length != 4) throw new ArgumentException("The number of input points must be 4.");
@@ -32,17 +34,23 @@ public class DocumentScanner
         Array.Sort(tmp, compareDistance);
         Point tr = tmp[0].Item2;
         Point br = tmp[1].Item2;
-        ordered = [tl, tr, br, bl]; 
+        ordered = [tl, tr, br, bl];
     }
-    
 
-    public void FourPointTransform(Mat src, ref Mat dst, Point[] pts)
+
+    internal void ResizeToHeight(Mat src, Mat dst, int height)
+    {
+        Size s = new Size(src.Cols * (height / (double) src.Rows), height);
+        Resize(src, dst, s, interpolation: InterpolationFlags.Area);
+    }
+
+    public void FourPointTransform(Mat src, Mat dst, Point[] pts)
     {
         orderPoints(pts, out var ordered_pts);
     }
 
 
-    public void PreProcess(Mat src, ref Mat dst)
+    public void PreProcess(Mat src, Mat dst)
     {
         using Mat imageGrayed = new();
         using Mat imageOpen = new();

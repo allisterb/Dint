@@ -13,6 +13,8 @@ public class DocumentScannerTests : Runtime
 {
     static readonly string ticketimagefile = AssemblyLocation.CombinePath("DocumentScanner_Ticket.jpg");
     static readonly string testsdatafile = AssemblyLocation.CombinePath("DocumentScanner.TestsData.xml");
+    static readonly Mat ticket;
+    static readonly DocumentScanner scanner = new DocumentScanner();
 
     static DocumentScannerTests()
     {
@@ -21,7 +23,6 @@ public class DocumentScannerTests : Runtime
             if (!DownloadFile("DocumentScanner.TestsData.xml", new Uri("https://ajb.nyc3.cdn.digitaloceanspaces.com/DocumentScanner_TestsData.xml"), testsdatafile))
             {
                 throw new Exception("Could not download DocumentScanner test data file.");
-                
             }
 
         }
@@ -31,24 +32,30 @@ public class DocumentScannerTests : Runtime
             if (!DownloadFile("DocumentScanner_Ticket.JPG", new Uri("https://ajb.nyc3.cdn.digitaloceanspaces.com/DocumentScanner_Ticket.jpg"), ticketimagefile))
             {
                 throw new Exception("Could not download DocumentScanner ticket image file.");
-
             }
-
         }
-    }
-    
-    [Fact]
-    public void CanPreprocess()
-    {
-        Assert.True(true);
-        using var fs = new FileStorage(testsdatafile, FileStorage.Modes.Read);
-        using var src = ImRead(ticketimagefile);
-        var dst = new Mat();
-        var ds = new DocumentScanner();
-        ds.PreProcess(src, ref dst);
-        var x = (Mat) fs["preProcess"]!;
-        Assert.True(x.IsEqualTo(dst));
 
+        ticket = ImRead(ticketimagefile);
+    }
+
+    [Fact]
+    public void CanPreProcess()
+    {
+        using var fs = new FileStorage(testsdatafile, FileStorage.Modes.Read);
+        using Mat dst = new();
+        scanner.PreProcess(ticket, dst);
+        var x = (Mat)fs["preProcess"]!;
+        Assert.True(x.IsEqualTo(dst));
+    }
+
+    [Fact]
+    public void CanResize()
+    {
+        using var fs = new FileStorage(testsdatafile, FileStorage.Modes.Read);
+        using Mat dst = new();
+        scanner.ResizeToHeight(ticket, dst, 500);
+        var x = (Mat)fs["resizeToHeight"]!;
+        Assert.True(x.IsEqualTo(dst));
     }
 }
 

@@ -2,6 +2,7 @@
 
 using OpenCvSharp;
 using static OpenCvSharp.Cv2;
+
 public static class CvExtensions
 {
     public static bool IsEqualTo(this Mat m, Mat n)
