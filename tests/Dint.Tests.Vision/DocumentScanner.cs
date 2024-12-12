@@ -49,7 +49,7 @@ public class DocumentScannerTests : Runtime
     }
 
     [Fact]
-    public void CanResize()
+    public void CanResizeToHeight()
     {
         using var fs = new FileStorage(testsdatafile, FileStorage.Modes.Read);
         using Mat dst = new();
