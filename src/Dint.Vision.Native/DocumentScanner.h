@@ -11,8 +11,8 @@ private:
 	cv::Mat m_input;
 public:
 	DocumentScanner(cv::Mat input);
-	DocumentScanner(void* input, int size);
-	cv::Mat GetImage(void* buffer, int size);
-	virtual cv::Mat PreProcess(cv::Mat src) = 0;
+	DocumentScanner(const void* input, int size);
+	cv::Mat GetImage(const void* buffer, int size);
+	virtual cv::Mat PreProcess(const cv::Mat& src) = 0;
 };
 
