@@ -8,6 +8,7 @@ using static OpenCvSharp.Cv2;
 
 public class DocumentScanner
 {
+    
     int CompareXCords(Point p1, Point p2) => p1.X.CompareTo(p2.X);
     
     int CompareYCords(Point p1, Point p2) => p1.Y.CompareTo(p2.Y);
@@ -18,6 +19,7 @@ public class DocumentScanner
     
     internal void ResizeToHeight(Mat src, Mat dst, int height)
     {
+        //var m = Mat.FromNativePointer
         Size s = new Size(src.Cols * (height / (double) src.Rows), height);
         Resize(src, dst, s, interpolation: InterpolationFlags.Area);
     }
