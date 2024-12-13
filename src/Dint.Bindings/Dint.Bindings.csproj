@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Dint.Vision.Native\Dint.Vision.Native.vcxproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="..\Dint.Vision.Native\bin\x64\Debug\dint.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+
+

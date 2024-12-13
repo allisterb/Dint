@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dint.Base\Dint.Base.csproj" />
+    <ProjectReference Include="..\Dint.Bindings\Dint.Bindings.csproj" />
   </ItemGroup>
 
 </Project>

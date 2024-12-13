@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "api.h"
 
-namespace Dint
+namespace Dint::Tests::Vision::Native
 {
 TEST(APITest, CanCastPointer) {
 	auto m = new cv::Mat(100, 100, 1);
