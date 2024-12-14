@@ -2,10 +2,10 @@
 #include "pch.h"
 #include "api.h"
 
-API void* __Test_Buffer(void* im, int size)
+API void* __Buffer_Test(void* im)
 {
-	auto m = ReadImage(im, size);
+	auto m = FromPtr(im);
 	Mat* o = new Mat();
-	cv::resize(m, *o, cv::Size(317, 455));
+	cv::resize(*m, *o, cv::Size(317, 455));
 	return ToPtr(o);
 }

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Dint.Vision.Native\Dint.Vision.Native.vcxproj" />
   </ItemGroup>

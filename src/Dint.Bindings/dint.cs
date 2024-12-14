@@ -4,9 +4,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-public unsafe class dint
+public unsafe static class dint
 {
-    [SuppressUnmanagedCodeSecurity, DllImport("dint", EntryPoint = "TEST_Buffer", CallingConvention = CallingConvention.Cdecl)]
-    internal static extern IntPtr TEST_Buffer(IntPtr buf, int size);
+    [SuppressUnmanagedCodeSecurity, DllImport("dint.dll", EntryPoint = "__Buffer_Test", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr Buffer_Test(IntPtr buf);
 
 }
