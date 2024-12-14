@@ -19,7 +19,7 @@ public class Program : Runtime
     #region Entry point
     static void Main(string[] args)
     {
-        Initialize("SharpGambit", "CLI", (args.Contains("--debug") || args.Contains("-d")), true, true);
+        Initialize("Dint", "CLI", (args.Contains("--debug") || args.Contains("-d")), true, true);
         PrintLogo();
         var result = new Parser().ParseArguments(args, optionTypes);
         result
@@ -31,11 +31,11 @@ public class Program : Runtime
     static void Help(ParserResult<object> result, IEnumerable<Error> errors)
     {
         HelpText help = GetAutoBuiltHelpText(result);
-        help.Heading = new HeadingInfo("SharpGambit generator command-line help");
+        help.Heading = new HeadingInfo("Dint generator command-line help");
         help.Copyright = "";
         if (errors.Any(e => e.Tag == ErrorType.VersionRequestedError))
         {
-            help.Heading = new HeadingInfo("SharpGambit", AssemblyVersion.ToString(3));
+            help.Heading = new HeadingInfo("Dint", AssemblyVersion.ToString(3));
             help.Copyright = "";
             Info(help);
             Exit(ExitResult.SUCCESS);
@@ -98,9 +98,9 @@ public class Program : Runtime
     {
         if (go.LibPath == "")
         {
-            go.LibPath = Path.Combine(Directory.GetCurrentDirectory(), "ext", "gambit");
+            go.LibPath = Path.Combine(Directory.GetCurrentDirectory(), "src", "Dint.Vision.Native");
         }
-        Info("Using {l} as gambit library path.", go.LibPath);
+        Info("Using {l} as dint library path.", go.LibPath);
         Dictionary<string, object> options = new Dictionary<string, object>()
         {
             {"RootDirectory", new DirectoryInfo(go.LibPath)},
@@ -122,7 +122,7 @@ public class Program : Runtime
 
     static void PrintLogo()
     {
-        Con.Write(new FigletText(font, "SharpGambit").Color(Color.Pink1));
+        Con.Write(new FigletText(font, "Dint").Color(Color.Pink1));
         Con.Write(new Text($"v{AssemblyVersion.ToString(3)}\n"));
     }
     public static void Exit(ExitResult result)

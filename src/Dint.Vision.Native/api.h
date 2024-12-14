@@ -1,24 +1,19 @@
 #pragma once
 
 #include "pch.h"
-#include "scanners/MryndzDocumentScanner.h"
 
 #define	API extern "C" __declspec(dllexport) 
 
-static void* ToPtr(cv::Mat* mat)
+using namespace cv;
+using namespace std;
+
+static void* ToPtr(cv::Mat* mat) {mat->addref(); return mat; }
+
+static Mat* FromPtr(void* ptr) { return reinterpret_cast<Mat*>(ptr); }
+
+static Mat ReadImage(void* buf, int size)
 {
-	mat->addref();
-	return mat;
+	auto im = cv::InputArray(std::vector<uchar>(static_cast<const uchar*>(buf), static_cast<const uchar*>(buf) + size));
+	return cv::imdecode(im, cv::ImreadModes::IMREAD_UNCHANGED);
 }
 
-static Mat* FromPtr(void* ptr)
-{
-	return reinterpret_cast<Mat*>(ptr);
-}
-
-API void* Get(void* buf, int size)
-{
-	//auto ds =  new MryndzDocumentScanner(buf, size);
-	//return static_cast<void*>(ds);
-	return nullptr;
-}

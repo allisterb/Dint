@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "SharpGambit.Generator": {
+    "Dint.Bindings.Generator": {
       "commandName": "Project",
-      "commandLineArgs": "bind --libpath C:\\Projects\\SharpGambit\\ext\\gambit"
+      "commandLineArgs": "bind --libpath C:\\Projects\\Dine\\src\\Dint.Vision.Native"
     }
   }
 }

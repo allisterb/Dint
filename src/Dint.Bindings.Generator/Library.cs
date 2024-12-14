@@ -76,10 +76,10 @@ public class Library : Runtime, ILibrary
         Module.OutputNamespace = Namespace;
         options.OutputDir = OutputDirName;
         options.GenerationOutputMode = GenerationOutputMode.FilePerModule;
-        Module.IncludeDirs.Add(Path.Combine(R, "src"));
-        Module.LibraryDirs.Add(Path.Combine(R, "build", "Release"));
+        Module.IncludeDirs.Add(Path.Combine(R, "Dint.Vision.Native"));
+        Module.LibraryDirs.Add(Path.Combine(R, "Dint.Vision.Native", "bin", "x64", "Debug"));
         //Module.Headers.Add("gambit.h");
-        Module.IncludeDirs.Add(Path.Combine(R, "..", "..", "src", "SharpGambit.Api.Native"));
+        Module.IncludeDirs.Add(Path.Combine(R, "lib", "opencv", "src", "SharpGambit.Api.Native"));
         Module.Headers.Add("sharpgambit.h");
         Module.LibraryDirs.Add(Path.Combine(R, "..", "..", "src", "SharpGambit.Api.Native", "bin", "x64", "Debug"));
         driver.ParserOptions.AddArguments("-fcxx-exceptions");
@@ -124,9 +124,9 @@ public class Library : Runtime, ILibrary
     public string R => RootDirectory.FullName;
     public string F { get; protected set; }
     public string OutputDirName { get; internal set; } = "";
-    public string OutputFileName { get; internal set; } = "gambit.cs";
-    public string ModuleName { get; internal set; } = "gambit";
-    public Module Module { get; internal set; } = new Module("gambit");
+    public string OutputFileName { get; internal set; } = "dint.cs";
+    public string ModuleName { get; internal set; } = "dint";
+    public Module Module { get; internal set; } = new Module("dint");
     public string Class { get; internal set; } = "";
     public string Namespace { get; internal set; } = "";
     public bool WithoutCommon { get; protected set; }
